@@ -58,18 +58,22 @@ def barres(tableau, titre, axe_y, source):
     return fig
 
 
-def nuage(tableau, x, y, etiquette, titre, axe_x, axe_y, source):
+def nuage(tableau, x, y, etiquette, titre, axe_x, axe_y, source, a_nommer=None):
     """Nuage de points, avec le nom de chaque point et la diagonale y = x.
 
     tableau : une ligne par point (par exemple une académie).
     x, y : noms des colonnes en abscisse et en ordonnée (dans la même unité).
-    etiquette : nom de la colonne écrite à côté de chaque point.
+    etiquette : nom de la colonne écrite à côté des points.
+    a_nommer : liste des points dont on écrit le nom (tous si None), pour éviter que
+               les noms se chevauchent quand les points sont serrés.
     La diagonale sert de repère : un point en dessous a une valeur y plus faible que x.
     """
     fig, ax = plt.subplots(figsize=(8, 7))
     ax.scatter(tableau[x], tableau[y])
 
     for _, ligne in tableau.iterrows():
+        if a_nommer is not None and ligne[etiquette] not in a_nommer:
+            continue  # on passe au point suivant sans écrire son nom
         ax.annotate(ligne[etiquette], (ligne[x], ligne[y]), fontsize=7,
                     xytext=(3, 3), textcoords="offset points")
 

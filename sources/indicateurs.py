@@ -80,6 +80,20 @@ def part_bac_admis(base, filiere, colonne_bac):
     return (sommes[colonne_bac] / sommes["acc_neobac"] * 100).round(1)
 
 
+def bac_pro_bacheliers_et_admis(panel, annee):
+    """Par académie, part des bacs pro parmi les bacheliers et parmi les néo-bacheliers admis (en %).
+
+    panel : résultat de panel_academies (une ligne par académie et par année).
+    part_bacheliers vient du fichier de poursuite d'études, part_admis de Parcoursup.
+    """
+    p = panel[panel["annee"] == annee].copy()
+    bacheliers = p[["bacheliers_Bac général", "bacheliers_Bac professionnel",
+                    "bacheliers_Bac technologique"]].sum(axis=1)
+    p["part_bacheliers"] = p["bacheliers_Bac professionnel"] / bacheliers * 100
+    p["part_admis"] = p["acc_bp"] / p["acc_neobac"] * 100
+    return p[["academie", "part_bacheliers", "part_admis"]].round(1)
+
+
 def part_admis_meme_academie(base, academie):
     """Part (en %) des admis venant de la même académie, dans les formations d'une académie.
 
