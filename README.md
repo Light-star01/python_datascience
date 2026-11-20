@@ -19,7 +19,7 @@ Les données sont téléchargées directement depuis les URL publiques. Elles ne
 ## Installation
 
 ```
-git clone https://github.com/aureliendinicolo/python_datascience.git
+git clone https://github.com/Light-star01/python_datascience
 cd python_datascience
 pip install -r requirements.txt
 ```
