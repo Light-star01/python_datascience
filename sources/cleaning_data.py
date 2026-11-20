@@ -207,6 +207,8 @@ def preparer_poursuite(poursuite):
 
 
 def base_selective(base):
-    """ créer une nouvelle base ou on ne garde que les formations sélectives
-    base : mettre le nom de la base créée et sauvegarder dans data"""
-    return base[base["selective"]==1.0]
+    """Renvoie la base réduite aux formations sélectives (selective == 1).
+
+    Les formations au statut inconnu (634 licences de 2018-2019) sont exclues.
+    """
+    return base[base["selective"] == 1.0]
