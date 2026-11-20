@@ -1,4 +1,4 @@
-def tableau_comp_1(base, selection, total, debut, fin, col_annee = "session", col_etab = "code_UAI"):
+def tableau_comp_1(base, selection, total, debut, fin, col_annee = "session", col_etab = "cod_uai"):
     """Tableau (établissement x année) du ratio selection/total,
     avec l'évolution entre la première et la dernière année (qu'on peut choisir).
 
