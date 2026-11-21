@@ -57,6 +57,43 @@ def boursiers_admis_et_candidats(base, par):
     return resultat.round(2)
 
 
+def ajouter_tranche_ips(base):
+    """Ajoute la colonne tranche_ips : le quart (quartile) de l'IPS du lycée de la formation.
+
+    pd.qcut coupe les IPS en 4 groupes de même taille : le premier quart contient les
+    formations des lycées les moins favorisés, le dernier celles des plus favorisés.
+    Les formations sans IPS (hors lycée) restent sans tranche.
+    """
+    base = base.copy()
+    base["tranche_ips"] = pd.qcut(base["ips_lycee"], 4,
+                                  labels=["1 (moins favorisés)", "2", "3", "4 (plus favorisés)"])
+    return base
+
+
+def part_bac_admis(base, filiere, colonne_bac):
+    """Part (en %) d'un type de bac parmi les néo-bacheliers admis d'une filière, par session.
+
+    colonne_bac : acc_bp (bac professionnel), acc_bt (bac technologique) ou acc_bg (général).
+    """
+    formations = base[base["filiere"] == filiere]
+    sommes = formations.groupby("session")[[colonne_bac, "acc_neobac"]].sum()
+    return (sommes[colonne_bac] / sommes["acc_neobac"] * 100).round(1)
+
+
+def bac_pro_bacheliers_et_admis(panel, annee):
+    """Par académie, part des bacs pro parmi les bacheliers et parmi les néo-bacheliers admis (en %).
+
+    panel : résultat de panel_academies (une ligne par académie et par année).
+    part_bacheliers vient du fichier de poursuite d'études, part_admis de Parcoursup.
+    """
+    p = panel[panel["annee"] == annee].copy()
+    bacheliers = p[["bacheliers_Bac général", "bacheliers_Bac professionnel",
+                    "bacheliers_Bac technologique"]].sum(axis=1)
+    p["part_bacheliers"] = p["bacheliers_Bac professionnel"] / bacheliers * 100
+    p["part_admis"] = p["acc_bp"] / p["acc_neobac"] * 100
+    return p[["academie", "part_bacheliers", "part_admis"]].round(1)
+
+
 def part_admis_meme_academie(base, academie):
     """Part (en %) des admis venant de la même académie, dans les formations d'une académie.
 
