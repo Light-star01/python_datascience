@@ -122,7 +122,6 @@ def indice_mentions(base, ref_bac, mentions=("acc_sansmention", "acc_ab", "acc_b
     mentions = list(mentions)
     b = base.copy()
     # Très bien + félicitations du jury. La colonne acc_tbf n'existe qu'à partir de 2021 :
-    # avant, elle est vide (NaN), et nombre + NaN donne NaN. fillna(0) la remplace par 0.
     b["acc_tb"] = b["acc_tb"] + b["acc_tbf"].fillna(0)
     agg = b.groupby(["selective", "session"])[mentions].sum()
     parts = agg.div(agg.sum(axis=1), axis=0) * 100
