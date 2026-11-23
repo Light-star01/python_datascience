@@ -52,5 +52,5 @@ Fait :
 
 À faire, dans cet ordre :
 
-1. Graphiques faits (`sources/graphiques.py` : `courbes`, `barres`, `nuage`) : taux de poursuite par voie du bac, bacs pro en BTS et bacs techno en IUT, bacs pro parmi les bacheliers et parmi les admis par académie, zoom Île-de-France, boursiers (rapport admis / vœux), boursiers selon l'IPS du lycée en CPGE et en BTS, mixité, mention au bac, reste: origine géographique. (cf carte aurélien)
+1. Graphiques faits (`sources/graphiques.py` : `courbes`, `barres`, `nuage`) : taux de poursuite par voie du bac, bacs pro en BTS et bacs techno en IUT, bacs pro parmi les bacheliers et parmi les admis par académie, zoom Île-de-France, boursiers (rapport admis / vœux), mixité, mention au bac, reste: origine géographique. (cf carte aurélien)
 2. Rédiger l'introduction (fait par Aurélien), la conclusion et les limites : formations sans code en 2018-2019, sélectivité imputée, sauts de la part de boursiers en 2020 et 2025 (aussi chez les candidats, donc liés au comptage), académie de la formation et académie du bac différentes.
