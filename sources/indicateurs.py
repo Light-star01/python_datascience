@@ -57,19 +57,6 @@ def boursiers_admis_et_candidats(base, par):
     return resultat.round(2)
 
 
-def ajouter_tranche_ips(base):
-    """Ajoute la colonne tranche_ips : le quart (quartile) de l'IPS du lycée de la formation.
-
-    pd.qcut coupe les IPS en 4 groupes de même taille : le premier quart contient les
-    formations des lycées les moins favorisés, le dernier celles des plus favorisés.
-    Les formations sans IPS (hors lycée) restent sans tranche.
-    """
-    base = base.copy()
-    base["tranche_ips"] = pd.qcut(base["ips_lycee"], 4,
-                                  labels=["1 (moins favorisés)", "2", "3", "4 (plus favorisés)"])
-    return base
-
-
 def part_bac_admis(base, filiere, colonne_bac):
     """Part (en %) d'un type de bac parmi les néo-bacheliers admis d'une filière, par session.
 
@@ -121,7 +108,7 @@ def parts_mentions(base, mentions, tot, col_annee="session", col_groupe="selecti
 def indice_mentions(base, ref_bac, mentions=("acc_sansmention", "acc_ab", "acc_b", "acc_tb")):
     mentions = list(mentions)
     b = base.copy()
-    # Très bien + félicitations du jury. La colonne acc_tbf n'existe qu'à partir de 2021 :
+    # Très bien + félicitations du jury (acc_tbf n'existe qu'à partir de 2021 : vide remplacé par 0)
     b["acc_tb"] = b["acc_tb"] + b["acc_tbf"].fillna(0)
     agg = b.groupby(["selective", "session"])[mentions].sum()
     parts = agg.div(agg.sum(axis=1), axis=0) * 100
