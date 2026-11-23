@@ -139,3 +139,22 @@ def diagramme_baton_normalise(tableau, groupe, titre="", ylabel="Part", ax=None)
     ax.legend(bbox_to_anchor=(1.02, 1), loc="upper left")
     plt.tight_layout()
     return ax
+
+
+
+def graphique_indice_mentions(indice, mentions=("acc_b", "acc_tb"),
+                              labels={1.0: "Filières sélectives", 0.0: "Filières non sélectives"}):
+    noms = {"acc_sansmention": "Sans mention", "acc_ab": "Assez bien",
+            "acc_b": "Bien", "acc_tb": "Très bien"}
+    fig, axes = plt.subplots(1, len(mentions), figsize=(12, 4.5), sharey=True)
+    for ax, m in zip(axes, mentions):
+        for g, lab in labels.items():
+            ax.plot(indice.loc[g][m], marker="o", label=lab)
+        ax.axhline(1, color="grey", linestyle="--")
+        ax.set_title(noms.get(m, m))
+        ax.set_xlabel("Session")
+    axes[0].set_ylabel("Indice (1 = profil des bacheliers)")
+    axes[-1].legend()
+    fig.suptitle("Mentions dans le supérieur par rapport à l'ensemble des bacheliers")
+    plt.tight_layout()
+    return fig

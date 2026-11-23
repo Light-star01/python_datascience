@@ -118,4 +118,11 @@ def parts_mentions(base, mentions, tot, col_annee="session", col_groupe="selecti
     agg = base.groupby([col_groupe, col_annee])[mentions + [tot]].sum()
     return agg[mentions].div(agg[tot], axis=0)
 
-def parts_mention_ref (base, )
+def indice_mentions(base, ref_bac, mentions=("acc_sansmention", "acc_ab", "acc_b", "acc_tb")):
+    mentions = list(mentions)
+    b = base.copy()
+    b["acc_tb"] = b["acc_tb"] + b["acc_tbf"]           # copie : pas de double fusion
+    agg = b.groupby(["selective", "session"])[mentions].sum()
+    parts = agg.div(agg.sum(axis=1), axis=0) * 100
+    sessions = parts.index.get_level_values("session")
+    return parts / ref_bac.loc[sessions, mentions].values
