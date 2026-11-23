@@ -106,3 +106,16 @@ def part_admis_meme_academie(base, academie):
 def part_filles_globale(base, col_f, col_tot, col_annee="session"):
     agg = base.groupby(col_annee)[[col_f, col_tot]].sum()
     return agg[col_f] / agg[col_tot]
+
+def parts_mentions(base, mentions, tot, col_annee="session", col_groupe="selective"):
+    """Part de chaque mention parmi les néo-bacheliers admis,
+    par groupe (ex. sélectif / non sélectif) et par année.
+
+    mentions : liste de colonnes (ex. ["acc_sansmention", "acc_ab", ...])
+    tot      : colonne du dénominateur (ex. "acc_neobac")
+    """
+    # on somme les effectifs, puis on calcule les parts
+    agg = base.groupby([col_groupe, col_annee])[mentions + [tot]].sum()
+    return agg[mentions].div(agg[tot], axis=0)
+
+def parts_mention_ref (base, )
