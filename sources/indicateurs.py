@@ -102,3 +102,7 @@ def part_admis_meme_academie(base, academie):
     formations = base[base["academie"] == academie]
     sommes = formations.groupby("session")[["acc_aca_orig", "acc_tot"]].sum()
     return (sommes["acc_aca_orig"] / sommes["acc_tot"] * 100).round(1)
+
+def part_filles_globale(base, col_f, col_tot, col_annee="session"):
+    agg = base.groupby(col_annee)[[col_f, col_tot]].sum()
+    return agg[col_f] / agg[col_tot]
