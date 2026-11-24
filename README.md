@@ -13,6 +13,8 @@ On ne cherche pas à établir un effet causal de la plateforme. On décrit comme
 - Parcoursup, vœux de poursuite d'études et de réorientation, sessions 2018 à 2025 : open data du ministère de l'Enseignement supérieur ([data.enseignementsup-recherche.gouv.fr](https://data.enseignementsup-recherche.gouv.fr/explore/?q=parcoursup)). Une ligne correspond à une formation pour une session.
 - Indice de position sociale (IPS) des lycées, rentrées 2016 à 2025 : open data de l'Éducation nationale ([data.education.gouv.fr](https://data.education.gouv.fr/explore/?q=indice+de+position+sociale)), en trois fichiers. Joint aux formations par le code UAI et l'année (CPGE et BTS principalement).
 - Taux de poursuite des néo-bacheliers dans l'enseignement supérieur par académie, 2010 à 2025 : open data du ministère de l'Enseignement supérieur ([fiche du jeu de données](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-taux-poursuite-enseignement-superieur-par-academie/information/)). Joint aux admis de Parcoursup par académie et par année.
+- Contours des régions, départements, arrondissements, cantons et communes de France (métropole et départements d'outre-mer) au format GeoJSON (https://packagist.org/packages/gregoiredavid/france-geojson)
+- Notes d'informations de la DEPP sur les résultats au bac de 2018 à 2025 (https://www.education.gouv.fr/sites/default/files/2025-07/depp-ni-2025-45-pdf-441555.pdf ) --> les données ont été extraites manuellement de ces rapports publiés par la DEPP (pas d'accès aux données d'origines)
 
 Les données sont téléchargées directement depuis les URL publiques. Elles ne sont pas stockées dans le dépôt.
 
