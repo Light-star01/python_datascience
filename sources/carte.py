@@ -89,6 +89,5 @@ def creer_carte(base, dossier_sortie=".", col_aca="acad_mies", col_dep="dep"):
         labels={"part_entrants": "% venus d'ailleurs"},
     )
     fig2.update_geos(fitbounds="locations", visible=False)
-    #fig2.write_html(f"{dossier_sortie}/mobilite_parcoursup_animation.html")
 
     return agg, fig, fig2
