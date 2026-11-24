@@ -39,20 +39,6 @@ Ouvrir `notebooks/rapport.ipynb` et exécuter toutes les cellules. Les données 
 - `sources/` : fonctions Python importées par les notebooks (`chargement_data.py` pour télécharger les données ; `cleaning_data.py`, `indicateurs.py` et `graphiques.py` à remplir).
 - `data/` : données téléchargées ou générées, non versionnées (voir `.gitignore`).
 
-## Avancement
 
-Fait :
 
-- chargement des 8 sessions avec mise en cache dans `data/raw/` (`sources/chargement_data.py`) ;
-- identifiant de formation suivi d'une année à l'autre (`code`), validé en 2019-2020 et en 2025 ;
-- sélectivité harmonisée (`selective`, 0/1), reportée de 2020 sur 2018-2019 puis complétée grâce à la filière (seules 634 licences de 2018-2019 restent sans statut) ;
-- nomenclature commune des filières (`filiere`) ;
-- base empilée : une ligne par formation et par session, environ 104 000 lignes.
 
-- préparation de la base en fonctions (`sources/cleaning_data.py`), appelées par `notebooks/rapport.ipynb` ;
-- enrichissements : IPS des lycées (`joindre_ips`), taux de poursuite par académie (`panel_academies`), indicateurs pour le zoom Île-de-France (`sources/indicateurs.py`).
-
-À faire, dans cet ordre :
-
-1. Graphiques faits (`sources/graphiques.py` : `courbes`, `barres`, `nuage`) : taux de poursuite par voie du bac, bacs pro en BTS et bacs techno en IUT, bacs pro parmi les bacheliers et parmi les admis par académie, zoom Île-de-France, boursiers (rapport admis / vœux), mixité, mention au bac, reste: origine géographique. (cf carte aurélien)
-2. Rédiger l'introduction (fait par Aurélien), la conclusion et les limites : formations sans code en 2018-2019, sélectivité imputée, sauts de la part de boursiers en 2020 et 2025 (aussi chez les candidats, donc liés au comptage), académie de la formation et académie du bac différentes.

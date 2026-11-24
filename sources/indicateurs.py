@@ -12,18 +12,6 @@ def taux_poursuite(poursuite, par):
     return (sommes["poursuivants"] / sommes["bacheliers"] * 100).round(1)
 
 
-def part_poursuite_autre_academie_idf(poursuite):
-    """Part (en %) des bacheliers franciliens poursuivant dans une autre académie d'Île-de-France.
-
-    Calculée parmi les bacheliers franciliens qui poursuivent dans le supérieur, chaque année.
-    Paris, Créteil et Versailles forment une seule région académique : une poursuite dans
-    une autre académie francilienne est donc comptée dans poursuivants_autre_academie_meme_region.
-    """
-    idf = poursuite[poursuite["academie"].isin(ACADEMIES_IDF)]
-    sommes = idf.groupby("annee")[["poursuivants_autre_academie_meme_region", "poursuivants"]].sum()
-    return (sommes["poursuivants_autre_academie_meme_region"] / sommes["poursuivants"] * 100).round(1)
-
-
 def boursiers_admis_et_candidats(base, par):
     """Part de boursiers parmi les néo-bacheliers, côté vœux et côté admis, par groupe (en %).
 
