@@ -7,9 +7,6 @@ ACADEMIES_IDF = ["Paris", "Créteil", "Versailles"]
 
 def taux_poursuite(poursuite, par):
     """Taux de poursuite dans le supérieur (en %) par groupe, par exemple par=["annee", "voie"].
-
-    Comme le recommande la documentation du jeu de données, on somme d'abord les
-    poursuivants et les bacheliers du groupe, puis on divise (et non une moyenne de taux).
     """
     sommes = poursuite.groupby(par)[["poursuivants", "bacheliers"]].sum()
     return (sommes["poursuivants"] / sommes["bacheliers"] * 100).round(1)
