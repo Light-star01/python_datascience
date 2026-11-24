@@ -1,6 +1,6 @@
 """Carte de la mobilité inter-académique Parcoursup (2018-2025).
 
-admis venus d'une autre académie = acc_tot - acc_aca_orig
+admis venus d'une autre académie = acc_neobac - acc_aca_orig
 """
 import io
 import math
@@ -39,7 +39,7 @@ def creer_carte(base, dossier_sortie=".", col_aca="acad_mies", col_dep="dep"):
 
     # Indicateurs par académie et par année
     agg = (base.groupby(["session", "academie"], as_index=False)
-               .agg(admis=("acc_tot", "sum"), meme_aca=("acc_aca_orig", "sum")))
+               .agg(admis=("acc_neobac", "sum"), meme_aca=("acc_aca_orig", "sum")))
     agg["entrants"] = agg["admis"] - agg["meme_aca"]
     agg["part_entrants"] = 100 * agg["entrants"] / agg["admis"]
 
