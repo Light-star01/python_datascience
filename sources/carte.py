@@ -141,6 +141,7 @@ def carte_poursuite(base, tab_taux, aca_lib="aca_lib", rentree_session="rentree_
         columns={aca_lib: "zone", rentree_session: "annee"}
     )
     taux = taux[~taux["zone"].isin(ACADEMIES_DROM)]
+    taux = taux[taux["annee"] > 2018]  # Garde après 2018
     gdf = creer_base_geographique_academies(taux["zone"].unique())
     gdf = gdf.assign(_cle=gdf["academie"].map(normaliser))
     taux = taux.assign(_cle=taux["zone"].map(normaliser))
@@ -157,8 +158,8 @@ def carte_poursuite(base, tab_taux, aca_lib="aca_lib", rentree_session="rentree_
     norm = Normalize(vmin=taux["taux"].min(), vmax=taux["taux"].max())
 
     lignes = int(np.ceil(len(annees) / 4))
-    fig, axes = plt.subplots(lignes, 4, figsize=(4.2 * 4, 4.4 * lignes))
-    axes = np.atleast_1d(axes).ravel()
+    fig, axes = plt.subplots(lignes, 4, figsize=(18, 5 * lignes))
+    axes = axes.ravel()
 
     for ax, annee in zip(axes, annees):
         data = gdf.merge(taux[taux["annee"] == annee][["_cle", "taux"]], on="_cle")
